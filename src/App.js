@@ -20,7 +20,6 @@ const App = () => {
   // Artık sahteVeri'ye ihtiyacınız olmayacak.
   // Arama çubuğunun çalışması için , arama kriterini tutacak başka bir state'e ihtiyacımız olacak.
   const [gonderiler, setGonderiler] = useState(sahteVeri);
-  const [aramaKriteri, setAramaKriteri] = useState("");
 
   const gonderiyiBegen = (gonderiID) => {
     /*
@@ -34,17 +33,19 @@ const App = () => {
         - gönderinin idsi "gonderiID" ile eşleşirse, istenen değerlerle yeni bir gönderi nesnesi döndürün.
         - aksi takdirde, sadece gönderi nesnesini değiştirmeden döndürün.
      */
-    setGonderiler(
-      gonderiler.map((post) =>
-        post.id === gonderiID ? (post.likes = post.likes + 1) : post.likes
-      )
-    );
+    const yeniData = gonderiler.map((post) => {
+      if (post.id === gonderiID) {
+        const updatedGonderi = { ...post };
+        updatedGonderi.likes = updatedGonderi.likes + 1;
+        return updatedGonderi;
+      }
+    });
   };
 
   return (
     <div className="App">
       <AramaCubugu />
-      <Gonderiler />
+      <Gonderiler gonderiler={gonderiler} gonderiyiBegen={gonderiyiBegen} />
       {/* AramaÇubuğu ve Gönderiler'i render etmesi için buraya ekleyin */}
       {/* Her bileşenin hangi proplara ihtiyaç duyduğunu kontrol edin, eğer ihtiyaç varsa ekleyin! */}
     </div>

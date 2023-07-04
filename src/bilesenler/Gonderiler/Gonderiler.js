@@ -11,9 +11,9 @@ const Gonderiler = (props) => {
       {/* gönderiler dizisini işleyip her döngüde bir Gönderi bileşeni çağırın*/}
       {
         /* Gönderi'nin çağırılmasında hangi propları kullanmanız gerektiğine dikkat edin! */
-        //gonderiler.map((tekPost) => (
-        //<Gonderi like={gonderiyiBegen} />
-        //))
+        gonderiler.map((tekPost) => (
+          <Gonderi gonderi={tekPost} />
+        ))
       }
     </div>
   );
